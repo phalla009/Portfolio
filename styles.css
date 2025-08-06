@@ -649,40 +649,28 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: 2.5rem;
-  }
-
-  .about-content {
-    flex-direction: column;
-    text-align: center;
+  nav {
+    flex-direction: column; /* logo on top, ul under */
+    align-items: flex-start;
   }
 
   nav ul {
-    gap: 15px;
+    flex-direction: row; /* Make menu horizontal */
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 10px;
+    gap: 10px;
+  }
+
+  nav ul li {
+    display: inline-block;
   }
 
   nav ul li a {
-    padding: 8px 15px;
+    padding: 8px 12px;
     font-size: 0.9rem;
-  }
-
-  .contact-container {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .contact-info {
-    padding: 20px;
-    text-align: center;
-  }
-
-  .contact-form-container {
-    padding: 30px 20px;
-  }
-
-  .social-links {
-    justify-content: center;
+    display: inline-block;
   }
 }
 
