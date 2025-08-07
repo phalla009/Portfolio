@@ -132,29 +132,60 @@ function updateGradient() {
 setInterval(updateGradient, 100);
 
 // Form submission with advanced animation
+// document.querySelector("#contactForm").addEventListener("submit", function (e) {
+//   e.preventDefault();
+//   const btn = this.querySelector(".submit-btn");
+//   const btnText = btn.querySelector(".btn-text");
+
+//   // Loading animation
+//   btnText.innerHTML = "Sending...";
+//   btn.style.background = "linear-gradient(45deg, #ffa500, #ff6b6b)";
+//   btn.style.transform = "scale(0.95)";
+
+//   // Simulate sending
+//   setTimeout(() => {
+//     btnText.innerHTML = "✓ Message Sent!";
+//     btn.style.background = "linear-gradient(45deg, #4CAF50, #45a049)";
+//     btn.style.transform = "scale(1)";
+
+//     // Reset form and button
+//     setTimeout(() => {
+//       btnText.innerHTML = "Send Message";
+//       btn.style.background = "linear-gradient(45deg, #00d4ff, #ff6b6b)";
+//       this.reset();
+
+//       // Reset all form labels
+//       const labels = this.querySelectorAll("label");
+//       labels.forEach((label) => {
+//         label.style.top = "50%";
+//         label.style.fontSize = "1rem";
+//         label.style.color = "rgba(255, 255, 255, 0.6)";
+//         label.style.background = "transparent";
+//       });
+//     }, 3000);
+//   }, 2000);
+// });
 document.querySelector("#contactForm").addEventListener("submit", function (e) {
   e.preventDefault();
+
   const btn = this.querySelector(".submit-btn");
   const btnText = btn.querySelector(".btn-text");
 
-  // Loading animation
+  // Animation - sending
   btnText.innerHTML = "Sending...";
   btn.style.background = "linear-gradient(45deg, #ffa500, #ff6b6b)";
   btn.style.transform = "scale(0.95)";
 
-  // Simulate sending
-  setTimeout(() => {
-    btnText.innerHTML = "✓ Message Sent!";
-    btn.style.background = "linear-gradient(45deg, #4CAF50, #45a049)";
-    btn.style.transform = "scale(1)";
-
-    // Reset form and button
-    setTimeout(() => {
-      btnText.innerHTML = "Send Message";
-      btn.style.background = "linear-gradient(45deg, #00d4ff, #ff6b6b)";
+  // ✉️ Send with EmailJS
+  emailjs
+    .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", this)
+    .then(() => {
+      btnText.innerHTML = "✓ Message Sent!";
+      btn.style.background = "linear-gradient(45deg, #4CAF50, #45a049)";
+      btn.style.transform = "scale(1)";
       this.reset();
 
-      // Reset all form labels
+      // Reset labels
       const labels = this.querySelectorAll("label");
       labels.forEach((label) => {
         label.style.top = "50%";
@@ -162,8 +193,18 @@ document.querySelector("#contactForm").addEventListener("submit", function (e) {
         label.style.color = "rgba(255, 255, 255, 0.6)";
         label.style.background = "transparent";
       });
-    }, 3000);
-  }, 2000);
+
+      // Reset button after delay
+      setTimeout(() => {
+        btnText.innerHTML = "Send Message";
+        btn.style.background = "linear-gradient(45deg, #00d4ff, #ff6b6b)";
+      }, 3000);
+    })
+    .catch((error) => {
+      btnText.innerHTML = "❌ Failed to send";
+      btn.style.background = "red";
+      console.error("EmailJS Error:", error);
+    });
 });
 
 // Create floating elements
