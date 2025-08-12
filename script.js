@@ -224,16 +224,17 @@ function createFloatingElements() {
   }
 }
 createFloatingElements();
+const chars =
+  "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
 
-// Matrix effect
 function createMatrixEffect() {
   const matrixBg = document.createElement("div");
   matrixBg.className = "matrix-bg";
   document.body.appendChild(matrixBg);
 
   const columns = Math.floor(window.innerWidth / 20);
-  const chars =
-    "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+  // លុបអក្សរចេញ ទុកតែលេខ 0 និង 1 ទេ
+  const onlyNumbers = chars.replace(/[^0-9]/g, "");
 
   for (let i = 0; i < columns; i++) {
     const column = document.createElement("div");
@@ -244,12 +245,15 @@ function createMatrixEffect() {
 
     let text = "";
     for (let j = 0; j < 20; j++) {
-      text += chars[Math.floor(Math.random() * chars.length)] + "<br>";
+      // ប្ដូរពី chars ទៅ onlyNumbers ដើម្បី random តែលេខ
+      text +=
+        onlyNumbers[Math.floor(Math.random() * onlyNumbers.length)] + "<br>";
     }
     column.innerHTML = text;
     matrixBg.appendChild(column);
   }
 }
+
 createMatrixEffect();
 
 // Enhanced scroll animations
