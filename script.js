@@ -212,3 +212,10 @@ if (window.innerWidth <= 768) {
   cursor.style.display = "none";
   cursorTrail.style.display = "none";
 }
+
+const toggleBtn = document.querySelector(".menu-toggle");
+const navLinks = document.querySelector(".nav-links");
+
+toggleBtn.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+});
