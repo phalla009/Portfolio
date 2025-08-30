@@ -629,22 +629,45 @@ a {
   min-width: 40px;
 }
 
-.contact-method-text {
-  flex: 1;
+.contact-methods {
+  display: grid;
+  gap: 20px; /* spacing between items */
+}
+
+.contact-method {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* space between icon and text */
+}
+
+.contact-method-icon {
+  font-size: 1.5rem;
+  color: #00d4ff;
+  min-width: 40px; /* keeps icons aligned */
+  display: flex;
+  justify-content: center;
 }
 
 .contact-method-text h4 {
   color: #00d4ff;
   margin-bottom: 5px;
+  font-size: 1rem;
 }
 
-.contact-method-text p {
+.contact-method-text p,
+.contact-method-text a {
   color: rgba(255, 255, 255, 0.8);
   margin: 0;
   font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.contact-method-text a:hover {
+  color: #00d4ff; /* hover effect for links */
 }
 
 .contact-form-container {
+  margin-top: 65px;
   background: rgba(255, 255, 255, 0.05);
   padding: 40px;
   border-radius: 25px;
@@ -930,8 +953,15 @@ footer {
   }
 }
 .contact-container {
-  grid-template-columns: 1fr;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 .contact-info {
@@ -1016,7 +1046,7 @@ footer {
 }
 
 .holographic-effect {
-  background: linear-gradient(45deg, #00d4ff, #ff6b6b, #4ecdc4, #45b7d1);
+  background: linear-gradient(45deg, #00d4ff, #45b7d1);
   background-size: 400% 400%;
   animation: holographic 4s ease-in-out infinite;
   -webkit-background-clip: text;
