@@ -389,7 +389,7 @@ h2 {
   }
 
   .stack-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: 1fr; /* single column */
   }
 
   .stack-item {
@@ -397,53 +397,56 @@ h2 {
   }
 }
 @media (max-width: 768px) {
+  .profile-pic {
+    width: 120px;
+    height: 120px;
+  }
+
+  .about-text {
+    text-align: center;
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
   h2 {
     font-size: 2em; /* Reduced from 2.5em */
   }
 
   .subtitle {
-    font-size: 1em; /* Reduced from 1.1em */
-    margin-bottom: 30px; /* Reduced from 40px */
+    font-size: 1em;
+    margin-bottom: 30px;
   }
 
   .skill-content {
-    flex-direction: column; /* Stack photo and text vertically */
+    flex-direction: column;
     text-align: center;
   }
 
-  .profile-pic {
-    width: 120px; /* Reduced from 150px */
-    height: 120px; /* Reduced from 150px */
-  }
-
-  .about-text {
-    max-width: 100%; /* Full width on mobile */
-    padding: 0 10px; /* Add padding for readability */
-  }
-
   .tech-stack {
-    gap: 20px; /* Reduced from 30px */
+    grid-template-columns: repeat(1, 1fr); /* force 2 columns */
+    gap: 20px;
   }
 
   .category h3 {
-    font-size: 1.3em; /* Reduced from 1.5em */
+    font-size: 1.3em;
   }
 
   .stack-grid {
-    grid-template-columns: 1fr; /* Single column on mobile */
-    gap: 15px; /* Reduced from 15px */
+    grid-template-columns: repeat(2, 1fr); /* 2 columns instead of 1 */
+    gap: 15px;
   }
 
   .stack-item {
-    width: 100%; /* Full width on mobile */
-    padding: 15px; /* Reduced from 20px */
-    min-height: 100px; /* Reduced from 120px */
+    width: 100%;
+    padding: 15px;
+    min-height: 100px;
   }
 
   .stack-item small {
-    font-size: 0.9em; /* Slightly reduced for mobile */
+    font-size: 0.9em;
   }
 }
+
 .profile-pic {
   width: 200px;
   height: 200px;
