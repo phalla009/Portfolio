@@ -253,6 +253,7 @@ h2 {
   max-width: 800px;
   margin: 0 auto;
 }
+
 .skill-content {
   display: flex;
   flex-wrap: wrap;
@@ -524,6 +525,7 @@ h2 {
   display: flex;
   gap: 15px; /* space between links */
   margin-top: 10px; /* optional spacing above links */
+  transition: all 0.3s ease;
 }
 
 .project-links a {
@@ -558,8 +560,11 @@ h2 {
 }
 
 .project-links a:hover {
+  box-shadow: 0 0 10px rgba(16, 155, 183, 0.682);
   border: 1px solid #00d5ffd1;
-  color: #fff;
+  color: #00d5ffa7;
+  transform: scale(1.1);
+  transition: 0.3s;
 }
 
 /* YouTube Section */
