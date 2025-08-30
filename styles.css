@@ -534,6 +534,28 @@ h2 {
   border-radius: 5px;
   transition: background 0.3s, color 0.3s;
 }
+.framework-logos {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.framework-logos img {
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  border-radius: 50%;
+  border: 1px solid #00d4ff;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(16, 155, 183, 0.682);
+  transform: translateY(0);
+}
+.framework-logos img:hover {
+  transform: scale(1.2);
+  transition: 0.3s;
+}
 
 .project-links a:hover {
   border: 1px solid #00d5ffd1;
