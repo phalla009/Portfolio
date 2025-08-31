@@ -138,7 +138,6 @@ nav {
   justify-content: space-between;
   align-items: center;
 }
-
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
@@ -626,6 +625,7 @@ a {
 }
 
 .contact-method {
+  justify-content: left;
   display: flex;
   align-items: center;
   gap: 15px;
@@ -673,6 +673,9 @@ a {
   min-width: 40px; /* keeps icons aligned */
   display: flex;
   justify-content: center;
+}
+.contact-method-text {
+  text-align: left; /* បញ្ជាក់អោយអត្ថបទនៅឆ្វេង */
 }
 
 .contact-method-text h4 {
