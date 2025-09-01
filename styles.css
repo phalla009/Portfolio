@@ -545,6 +545,7 @@ h2 {
 }
 
 .project-card:hover {
+  border: 1px solid #00d4ff;
   transform: translateY(-10px);
   box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
   background: rgba(255, 255, 255, 0.15);
@@ -586,6 +587,7 @@ h2 {
   border-radius: 5px;
   transition: background 0.3s, color 0.3s;
 }
+
 .framework-logos {
   display: flex;
   gap: 10px;
