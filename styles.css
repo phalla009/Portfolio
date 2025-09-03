@@ -55,31 +55,6 @@ body {
   opacity: 0.6;
   mix-blend-mode: difference;
 }
-
-/* .cursor.hover {
-  transform: translate(-50%, -50%) scale(2);
-  background: rgba(0, 212, 255, 0.1);
-  border-color: #ff6b6b;
-} */
-/* 
-.cursor.click {
-  transform: translate(-50%, -50%) scale(0.8);
-  background: rgba(255, 107, 107, 0.2);
-}
-
-.cursor-trail.hover {
-  width: 30px;
-  height: 30px;
-  opacity: 0.3;
-}
-
-.cursor-trail.click {
-  width: 40px;
-  height: 40px;
-  opacity: 0.2;
-  background: #ff6b6b;
-} */
-
 /* Floating particles */
 .particles {
   position: fixed;
@@ -570,9 +545,6 @@ h2 {
   transition: all 0.3s ease;
 }
 
-.project-card a:hover {
-  color: #00d4ff;
-}
 .project-links {
   display: flex;
   gap: 15px; /* space between links */
@@ -1293,4 +1265,22 @@ footer {
   100% {
     top: 100%;
   }
+}
+/* ================= Scroll Animations ================= */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.scroll-animate.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Optional: staggered delays */
+.scroll-delay-1 {
+  transition-delay: 0.4s;
+}
+.scroll-delay {
+  transition-delay: 0.8s;
 }

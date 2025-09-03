@@ -126,24 +126,6 @@ document
     enhancedObserver.observe(el);
   });
 
-// ===================== Scroll / Parallax Effects =====================
-window.addEventListener("scroll", () => {
-  const scrolled = window.pageYOffset;
-  const hero = document.querySelector("#hero");
-  if (hero) hero.style.transform = `translateY(${-scrolled * 0.5}px)`;
-
-  const header = document.querySelector("header");
-  header.style.background = `rgba(26,26,46,${
-    Math.min(scrolled / 100, 1) * 0.9
-  })`;
-
-  document.querySelectorAll(".project-card").forEach((card, index) => {
-    const speed = 0.02 + index * 0.01;
-    const rotation = scrolled * speed;
-    card.style.transform += ` rotateY(${rotation}deg)`;
-  });
-});
-
 // ===================== Mobile Menu =====================
 const toggleBtn = document.querySelector(".menu-toggle");
 const navLinks = document.querySelector(".nav-links");
@@ -151,3 +133,20 @@ const navLinks = document.querySelector(".nav-links");
 toggleBtn.addEventListener("click", () => {
   navLinks.classList.toggle("active");
 });
+
+// ===================== Scroll Animations =====================
+const scrollElements = document.querySelectorAll(".scroll-animate");
+
+const observer = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+        observer.unobserve(entry.target); // animate once
+      }
+    });
+  },
+  { threshold: 0.2 } // trigger when 20% visible
+);
+
+scrollElements.forEach((el) => observer.observe(el));
