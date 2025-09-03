@@ -56,12 +56,12 @@ body {
   mix-blend-mode: difference;
 }
 
-.cursor.hover {
+/* .cursor.hover {
   transform: translate(-50%, -50%) scale(2);
   background: rgba(0, 212, 255, 0.1);
   border-color: #ff6b6b;
-}
-
+} */
+/* 
 .cursor.click {
   transform: translate(-50%, -50%) scale(0.8);
   background: rgba(255, 107, 107, 0.2);
@@ -78,7 +78,7 @@ body {
   height: 40px;
   opacity: 0.2;
   background: #ff6b6b;
-}
+} */
 
 /* Floating particles */
 .particles {
@@ -435,6 +435,7 @@ h2 {
 }
 
 .stack-item:hover {
+  cursor: pointer;
   border: 1px solid #00d4ff; /* Correct syntax: width style color */
   transform: translateY(-10px);
   box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
@@ -544,6 +545,7 @@ h2 {
 }
 
 .project-card:hover {
+  cursor: pointer;
   border: 1px solid #00d4ff;
   transform: translateY(-10px);
   box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
