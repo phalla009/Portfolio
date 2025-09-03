@@ -71,20 +71,42 @@ function createMatrixEffect() {
 createMatrixEffect();
 
 // ===================== Hero Typing Effect =====================
-function addTypingEffect() {
+function typingLoopEffect() {
   const heroTitle = document.querySelector(".hero-content h1");
   if (!heroTitle) return;
-  const text = heroTitle.textContent;
+
+  const text = heroTitle.dataset.text || heroTitle.textContent;
+  if (!heroTitle.dataset.text) heroTitle.dataset.text = text;
   heroTitle.textContent = "";
+
   let i = 0;
-  const timer = setInterval(() => {
-    if (i < text.length) {
+  let forward = true;
+
+  function type() {
+    if (forward) {
       heroTitle.textContent += text.charAt(i);
       i++;
-    } else clearInterval(timer);
-  }, 100);
+      if (i === text.length) {
+        forward = false;
+        setTimeout(type, 2000); // wait 1s before deleting
+      } else {
+        setTimeout(type, 200); // typing speed
+      }
+    } else {
+      heroTitle.textContent = text.substring(0, i - 1);
+      i--;
+      if (i === 0) {
+        forward = true;
+        setTimeout(type, 200); // pause before typing again
+      } else {
+        setTimeout(type, 100); // deleting speed
+      }
+    }
+  }
+
+  type();
 }
-addTypingEffect();
+typingLoopEffect();
 
 // ===================== Project Cards 3D Tilt =====================
 document.querySelectorAll(".project-card").forEach((card) => {
