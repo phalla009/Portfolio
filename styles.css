@@ -683,6 +683,7 @@ a {
 }
 
 .contact-method:hover {
+  cursor: pointer;
   background: rgba(0, 212, 255, 0.1);
   transform: translateX(10px);
   box-shadow: 0 5px 25px rgba(0, 212, 255, 0.2);
