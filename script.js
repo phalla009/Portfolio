@@ -1,66 +1,3 @@
-// ===================== Custom Cursor =====================
-const cursor = document.querySelector(".cursor");
-const cursorTrail = document.querySelector(".cursor-trail");
-let mouseX = 0,
-  mouseY = 0;
-let cursorX = 0,
-  cursorY = 0;
-let trailX = 0,
-  trailY = 0;
-
-document.addEventListener("mousemove", (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
-
-function animateCursor() {
-  cursorX += (mouseX - cursorX) * 0.1;
-  cursorY += (mouseY - cursorY) * 0.1;
-  cursor.style.left = cursorX + "px";
-  cursor.style.top = cursorY + "px";
-
-  trailX += (mouseX - trailX) * 0.05;
-  trailY += (mouseY - trailY) * 0.05;
-  cursorTrail.style.left = trailX + "px";
-  cursorTrail.style.top = trailY + "px";
-
-  requestAnimationFrame(animateCursor);
-}
-animateCursor();
-
-// Hover effects
-document
-  .querySelectorAll(
-    "a, button, .project-card, input, textarea, [data-cursor-hover]"
-  )
-  .forEach((el) => {
-    el.addEventListener("mouseenter", () => {
-      cursor.classList.add("hover");
-      cursorTrail.classList.add("hover");
-    });
-    el.addEventListener("mouseleave", () => {
-      cursor.classList.remove("hover");
-      cursorTrail.classList.remove("hover");
-    });
-  });
-
-// Click effect
-document.addEventListener("mousedown", () => {
-  cursor.classList.add("click");
-  cursorTrail.classList.add("click");
-});
-document.addEventListener("mouseup", () => {
-  cursor.classList.remove("click");
-  cursorTrail.classList.remove("click");
-});
-
-// Hide cursor on mobile
-if ("ontouchstart" in window || navigator.maxTouchPoints) {
-  cursor.style.display = "none";
-  cursorTrail.style.display = "none";
-  document.body.style.cursor = "auto";
-}
-
 // ===================== Particles & Floating Elements =====================
 function createParticles() {
   const container = document.querySelector(".particles");
@@ -207,12 +144,7 @@ window.addEventListener("scroll", () => {
   });
 });
 
-// ===================== Mobile Menu / Cursor Disable =====================
-if (window.innerWidth <= 768) {
-  cursor.style.display = "none";
-  cursorTrail.style.display = "none";
-}
-
+// ===================== Mobile Menu =====================
 const toggleBtn = document.querySelector(".menu-toggle");
 const navLinks = document.querySelector(".nav-links");
 
