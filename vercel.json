@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/CV",
+      "destination": "/CV/index.html"
+    }
+  ]
+}
