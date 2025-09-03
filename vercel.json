@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/mycv",
-      "destination": "/CV/index.html"
+      "destination": "/mycv/index.html"
     }
   ]
 }
