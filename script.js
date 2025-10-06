@@ -11,7 +11,7 @@ function createParticles() {
     container.appendChild(particle);
   }
 }
-createParticles();
+// createParticles();
 
 function createFloatingElements() {
   const container = document.createElement("div");
@@ -27,7 +27,7 @@ function createFloatingElements() {
     container.appendChild(el);
   }
 }
-createFloatingElements();
+// createFloatingElements();
 
 // ===================== Smooth Scrolling =====================
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
