@@ -1285,3 +1285,6 @@ footer {
 .scroll-delay {
   transition-delay: 0.8s;
 }
+b {
+  color: #40b6ff;
+}
