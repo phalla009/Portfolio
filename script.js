@@ -173,81 +173,25 @@ const observer = new IntersectionObserver(
 
 scrollElements.forEach((el) => observer.observe(el));
 
-// // Modal logic
-// const modal = document.getElementById("projectModal");
-// const modalTitle = document.getElementById("modalTitle");
-// const modalImage = document.getElementById("modalImage");
-// const modalDescription = document.getElementById("modalDescription");
-// const modalFrameworks = document.getElementById("modalFrameworks");
-// const modalLinks = document.getElementById("modalLinks");
-// const closeBtn = document.querySelector(".modal .close");
+// popup model
+const popup = document.getElementById("popup-detail");
+const btnShow = document.querySelector(".project-links a:last-child");
+const btnClose = document.getElementById("closePopup");
 
-// // Example data for projects
-// const projectDetails = [
-//   {
-//     title: "Project One",
-//     description:
-//       "Create a project (E-commerce) website name KRSTORE using Python and Flask.",
-//     image: "/images/project1.png", // Add your image path
-//     frameworks: [
-//       {
-//         src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-//         alt: "Python",
-//       },
-//       {
-//         src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg",
-//         alt: "Flask",
-//       },
-//     ],
-//     links: [
-//       { href: "https://krstore.hphalla.lol/", text: "Demo" },
-//       {
-//         href: "https://github.com/phalla009/KR_Store_Ecommerce",
-//         text: "Source Code",
-//       },
-//     ],
-//   },
-//   // Add other projects here with the same structure
-// ];
+btnShow.addEventListener("click", () => {
+  popup.style.display = "flex";
+  document.body.style.overflow = "hidden"; // Disable scrolling
+});
 
-// // Open modal on project-card click
-// document.querySelectorAll(".project-card").forEach((card, index) => {
-//   card.addEventListener("click", () => {
-//     const project = projectDetails[index];
-//     modalTitle.textContent = project.title;
-//     modalDescription.textContent = project.description;
-//     modalImage.src = project.image;
+btnClose.addEventListener("click", () => {
+  popup.style.display = "none";
+  document.body.style.overflow = "auto"; // Re-enable scrolling
+});
 
-//     // Frameworks
-//     modalFrameworks.innerHTML = "";
-//     project.frameworks.forEach((fw) => {
-//       const img = document.createElement("img");
-//       img.src = fw.src;
-//       img.alt = fw.alt;
-//       img.style.width = "50px";
-//       img.style.margin = "0 5px";
-//       modalFrameworks.appendChild(img);
-//     });
-
-//     // Links
-//     modalLinks.innerHTML = "";
-//     project.links.forEach((link) => {
-//       const a = document.createElement("a");
-//       a.href = link.href;
-//       a.textContent = link.text;
-//       a.target = "_blank";
-//       a.style.display = "inline-block";
-//       a.style.margin = "5px";
-//       a.style.color = "#00d4ff";
-//       modalLinks.appendChild(a);
-//     });
-
-//     modal.style.display = "block";
-//   });
-// });
-
-// // Close modal
-// closeBtn.addEventListener("click", () => (modal.style.display = "none"));
-// window.addEventListener("click", (e) => {
-//   if (e.target == modal) modal.style.display = "none";
-// });
+// Click outside popup to close
+window.addEventListener("click", (e) => {
+  if (e.target === popup) {
+    popup.style.display = "none";
+    document.body.style.overflow = "auto"; // Re-enable scrolling
+  }
+});
