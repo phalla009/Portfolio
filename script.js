@@ -42,7 +42,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 let gradientAngle = 0;
 function updateGradient() {
   gradientAngle += 0.5;
-  document.body.style.background = `linear-gradient(${gradientAngle}deg, #1a1a2e, #16213e, #0f3460, #1a1a2e)`;
+  document.body.style.background = `linear-gradient(${gradientAngle}deg, #171717ff, #080909ff, #1b1e1eff, #101013f1)`;
   requestAnimationFrame(updateGradient);
 }
 updateGradient();
@@ -195,3 +195,31 @@ window.addEventListener("click", (e) => {
     document.body.style.overflow = "auto"; // Re-enable scrolling
   }
 });
+
+// api
+function copyLink() {
+  const input = document.getElementById("apiInput");
+  input.select();
+  input.setSelectionRange(0, 99999); // for mobile
+
+  navigator.clipboard
+    .writeText(input.value)
+    .then(() => {
+      // show styled message
+      const msg = document.getElementById("copyMessage");
+      msg.style.display = "block";
+      msg.style.opacity = "1";
+
+      // fade out after 2 seconds
+      setTimeout(() => {
+        msg.style.transition = "opacity 0.5s";
+        msg.style.opacity = "0";
+        setTimeout(() => {
+          msg.style.display = "none";
+        }, 500);
+      }, 2000);
+    })
+    .catch(() => {
+      alert("Failed to copy link.");
+    });
+}
