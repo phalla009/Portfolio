@@ -173,51 +173,102 @@ const observer = new IntersectionObserver(
 
 scrollElements.forEach((el) => observer.observe(el));
 
-// popup model
-const popup = document.getElementById("popup-detail");
-const btnShow = document.querySelector(".project-links a:last-child");
-const btnClose = document.getElementById("closePopup");
 
-btnShow.addEventListener("click", () => {
-  popup.style.display = "flex";
-  document.body.style.overflow = "hidden"; // Disable scrolling
+// ===================== NEW POPUP LOGIC (Added) =====================
+document.addEventListener('DOMContentLoaded', () => {
+    const popupOverlay = document.getElementById('project-popup');
+    const closeBtn = document.querySelector('.close-popup');
+    const popupImg = document.getElementById('popup-img');
+    const popupTitle = document.getElementById('popup-title');
+    const popupDesc = document.getElementById('popup-desc');
+    const popupTech = document.getElementById('popup-tech');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const viewButtons = document.querySelectorAll('.view-project-btn');
+
+    let currentImages = [];
+    let currentIndex = 0;
+
+    // Open Popup
+    viewButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Get Data
+            const title = btn.getAttribute('data-title');
+            const desc = btn.getAttribute('data-desc');
+            const tech = btn.getAttribute('data-tech');
+            const imagesRaw = btn.getAttribute('data-images');
+            
+            // Parse Images
+            currentImages = imagesRaw ? imagesRaw.split(',').map(img => img.trim()) : [];
+            currentIndex = 0;
+
+            // Set Content
+            popupTitle.textContent = title;
+            popupDesc.textContent = desc;
+            popupTech.textContent = `Tech Stack: ${tech}`;
+            
+            if (currentImages.length > 0) {
+                popupImg.src = currentImages[0];
+                popupImg.style.display = 'block';
+            } else {
+                popupImg.style.display = 'none';
+            }
+
+            // Toggle Buttons
+            if (currentImages.length > 1) {
+                prevBtn.style.display = 'block';
+                nextBtn.style.display = 'block';
+            } else {
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+            }
+
+            // Show Popup
+            popupOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Stop background scrolling
+        });
+    });
+
+    // Close Popup
+    const closePopup = () => {
+        popupOverlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    };
+
+    closeBtn.addEventListener('click', closePopup);
+    popupOverlay.addEventListener('click', (e) => {
+        if (e.target === popupOverlay) closePopup();
+    });
+
+    // Image Navigation
+    const updateImage = () => {
+        popupImg.src = currentImages[currentIndex];
+    };
+
+    prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex === 0) ? currentImages.length - 1 : currentIndex - 1;
+        updateImage();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex === currentImages.length - 1) ? 0 : currentIndex + 1;
+        updateImage();
+    });
 });
 
-btnClose.addEventListener("click", () => {
-  popup.style.display = "none";
-  document.body.style.overflow = "auto"; // Re-enable scrolling
-});
-
-// Click outside popup to close
-window.addEventListener("click", (e) => {
-  if (e.target === popup) {
-    popup.style.display = "none";
-    document.body.style.overflow = "auto"; // Re-enable scrolling
-  }
-});
-
-// api
+// ===================== API Copy Link Logic =====================
 function copyLink() {
   const input = document.getElementById("apiInput");
   input.select();
   input.setSelectionRange(0, 99999); // for mobile
 
-  navigator.clipboard
-    .writeText(input.value)
+  navigator.clipboard.writeText(input.value)
     .then(() => {
-      // show styled message
       const msg = document.getElementById("copyMessage");
       msg.style.display = "block";
-      msg.style.opacity = "1";
-
-      // fade out after 2 seconds
-      setTimeout(() => {
-        msg.style.transition = "opacity 0.5s";
-        msg.style.opacity = "0";
-        setTimeout(() => {
-          msg.style.display = "none";
-        }, 500);
-      }, 2000);
+      setTimeout(() => { msg.style.display = "none"; }, 2000);
     })
     .catch(() => {
       alert("Failed to copy link.");
