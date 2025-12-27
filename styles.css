@@ -1391,84 +1391,54 @@ b {
    Please keep your existing CSS file and APPEND the code below to the bottom of it. 
    This ensures your background and matrix effects stay exactly the same. */
 
-/* ================== NEW POPUP STYLES ================== */
+/* Overlay */
 .popup-overlay {
-  display: none; /* Hidden by default */
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9); /* Dark overlay */
-  z-index: 10000;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(5px);
+  z-index: 10000;
+
   opacity: 0;
-  transition: opacity 0.3s ease;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
 }
 
 .popup-overlay.active {
-  display: flex;
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
+/* Popup Box */
 .popup-container {
   background: rgba(20, 20, 20, 0.95);
   padding: 30px;
   border-radius: 15px;
+  height: 600px;
   max-width: 800px;
   width: 90%;
-  position: relative;
-  border: 1px solid #00d4ff;
+  border: 1px solid #0088ffe3;
   box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  transform: scale(0.85) translateY(40px);
+  opacity: 0;
+  transition: all 0.4s ease;
 }
 
-.popup-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  position: relative;
-  margin-bottom: 20px;
+.popup-overlay.active .popup-container {
+  transform: scale(1) translateY(0);
+  opacity: 1;
 }
 
-.popup-image-wrapper {
-  width: 100%;
-  height: 300px; /* Fixed height for consistency */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  background: #000;
-  border-radius: 8px;
-}
-
-#popup-img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.nav-btn {
-  background: transparent;
-  border: none;
-  color: #00d4ff;
-  font-size: 2rem;
-  cursor: pointer;
-  padding: 0 15px;
-  transition: transform 0.2s, color 0.2s;
-  z-index: 10;
-}
-
-.nav-btn:hover {
-  color: #fff;
-  transform: scale(1.2);
-}
-
+/* Close */
 .close-popup {
   position: absolute;
   top: 10px;
@@ -1476,27 +1446,149 @@ b {
   font-size: 30px;
   color: #fff;
   cursor: pointer;
-  transition: color 0.3s;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .close-popup:hover {
   color: #ff6b6b;
+  transform: rotate(90deg);
 }
 
+/* Body */
+.popup-body {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Image wrapper stays the same */
+.popup-image-wrapper {
+  flex: 1;
+  height: 300px;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Image animation */
+#popup-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.95) translateY(20px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+/* Active popup triggers image animation */
+.popup-overlay.active #popup-img {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Optional: Keyframe for image change (slide + fade) */
+@keyframes imageIn {
+  0% {
+    opacity: 0;
+    transform: translateX(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Trigger keyframe animation on image change */
+#popup-img.animate {
+  animation: imageIn 0.45s ease forwards;
+}
+
+@keyframes imageIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Navigation Buttons */
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 15px;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.nav-btn:hover {
+  color: #fff;
+  transform: scale(1.15);
+}
+
+/* Info container animation */
 .popup-info {
   text-align: center;
   color: #eee;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
+/* Active state when popup is open */
+.popup-overlay.active .popup-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Title animation (optional: slight delay for stagger effect) */
 .popup-info h3 {
-  color: #00d4ff;
+  color: #0088ffe3;
   margin-bottom: 10px;
   font-size: 1.8rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
 }
 
+.popup-overlay.active .popup-info h3 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Paragraph animation */
 .popup-info p {
   margin-bottom: 10px;
   line-height: 1.5;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
+}
+
+.popup-overlay.active .popup-info p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tech info small tag */
+.popup-info small {
+  color: #00d4ff;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s;
+}
+
+.popup-overlay.active .popup-info small {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Mobile Adjustments */
@@ -1505,7 +1597,7 @@ b {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.14);
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -1515,9 +1607,12 @@ b {
     font-size: 1.2rem;
   }
   .nav-btn.prev {
+    z-index: 100;
+    top: 120px;
     left: 10px;
   }
   .nav-btn.next {
+    top: 120px;
     right: 10px;
   }
 
@@ -1527,4 +1622,69 @@ b {
   .popup-image-wrapper {
     height: 200px;
   }
+}
+.demo-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.demo-link::after {
+  content: "Demo";
+  position: absolute;
+  top: 120%;
+  background: #1111119e;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition: all 0.2s ease;
+}
+
+.demo-link:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+.tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 120%;
+  background: #1111119e;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: all 0.2s ease;
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  top: 120%;
+  border: 6px solid transparent;
+  border-top-color: #111;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.tooltip:hover::after,
+.tooltip:hover::before {
+  opacity: 1;
+  transform: translateY(0);
 }
