@@ -262,23 +262,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ===================== API Copy Link Logic =====================
-function copyLink() {
-  const input = document.getElementById("apiInput");
+function copyLink(inputId) {
+  const input = document.getElementById(inputId);
   input.select();
-  input.setSelectionRange(0, 99999); // for mobile
+  input.setSelectionRange(0, 99999);
 
   navigator.clipboard
     .writeText(input.value)
     .then(() => {
       const msg = document.getElementById("copyMessage");
       msg.style.display = "block";
-      setTimeout(() => {
-        msg.style.display = "none";
-      }, 2000);
+      msg.innerText = "Copied!";
+      setTimeout(() => (msg.style.display = "none"), 2000);
     })
-    .catch(() => {
-      alert("Failed to copy link.");
-    });
+    .catch(() => alert("Failed to copy link."));
 }
 
 //disble inspact
