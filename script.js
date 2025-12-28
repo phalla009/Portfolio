@@ -272,7 +272,7 @@ function copyLink(inputId) {
     .then(() => {
       const msg = document.getElementById("copyMessage");
       msg.style.display = "block";
-      msg.innerText = "Copied!";
+      msg.innerText = "Link Copied!";
       setTimeout(() => (msg.style.display = "none"), 2000);
     })
     .catch(() => alert("Failed to copy link."));

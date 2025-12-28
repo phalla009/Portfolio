@@ -10,6 +10,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.css" rel="stylesheet" />
+    
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   </head>
   <body>
@@ -458,27 +460,25 @@
         </div>
       </div>
     </section>
-
+    <!-- Copy message notification -->
     <div
-      id="copyMessage"
-      style="
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #00000065;
-        color: #fff;
-        padding: 12px 25px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        display: none;
-        font-size: 16px;
-        z-index: 1000;
-      "
-    >
-      Link copied!
+          id="copyMessage"
+          style="
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #00000065;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: none;
+            font-size: 16px;
+            z-index: 1000;
+          "
+        >
     </div>
-
     <section id="api-link">
       <div
         class="scroll-animate container"
@@ -497,86 +497,128 @@
         >
           <i class="fa-solid fa-link"></i> API Link
         </h2>
+         <p style="text-align: center; font-size: 20px; color: #ccc; margin-bottom: 50px; line-height: 1.6;font-family: 'Battambang', Arial, sans-serif;">
+          អ្នកអាចប្រើ API របស់យើងសម្រាប់ទាញយកទិន្នន័យផលិតផលដោយស្វ័យប្រវត្តិ។ <br>
+          API គាំទ្រ <strong>GET requests</strong> និងទិន្នន័យមានទ្រង់ទ្រាយ <strong>JSON</strong>។
+        </p>
 
         <strong style="display: block; text-align: center; font-size: 16px; color: #fffefe97;">
           Copy this API link:
-        </strong>
+        </strong><br>
+        <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
 
-        <!-- API 1 -->
-        <div style="text-align: center; margin-top: 30px">
-          <input
-            type="text"
-            id="apiInput1"
-            value="https://krstoreapi.phalla.lol/api/products/kr"
-            readonly
-            style="
-              width: 80%;
-              max-width: 500px;
-              padding: 12px 15px;
-              background: #0000002c;
-              font-size: 16px;
-              text-align: center;
-              border-radius: 8px;
-              border: 1px solid #0000008a;
-              outline: none;
-              color: #fff;
-            "
-          />
-          <button
-            onclick="copyLink('apiInput1')"
-            style="
-              margin-left: 10px;
-              padding: 12px 20px;
-              font-size: 16px;
-              border: none;
-              border-radius: 8px;
-              background-color: #0000003d;
-              color: white;
-              cursor: pointer;
-            "
-          >
-            <i class="fa-regular fa-copy"></i>
-          </button>
+          <!-- API 1 -->
+          <div style="background: #2c2c2c; padding: 25px; border-radius: 12px; flex: 1 1 300px; max-width: 450px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            <h3 style="color: #ffd700; margin-bottom: 15px;">KRPhone Store API</h3>
+            <input
+              type="text"
+              id="apiInput1"
+              value="https://krstoreapi.phalla.lol/api/products/kr"
+              readonly
+              style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: #00000033; color: #fff; text-align: center; font-size: 14px; cursor: pointer;"
+            />
+            <button
+              onclick="copyLink('apiInput1')"
+              style="margin-top: 15px; width: 100%; padding: 12px; border: none; border-radius: 8px; background: #444; color: #fff; font-size: 14px; cursor: pointer;"
+            >
+              <i class="fa-regular fa-copy"></i> Copy Link
+            </button>
+            <p style="color: #ccc; margin-top: 10px; font-size: 14px; line-height: 1.4;font-family: 'Battambang', Arial, sans-serif;">
+            សម្រាប់ទាញយកផលិតផល KRPhone Store JSON data។ ប្រើ GET request.
+          </p>
         </div>
 
         <!-- API 2 -->
-        <div style="text-align: center; margin-top: 30px">
-          <input
-            type="text"
-            id="apiInput2"
-            value="https://minimartapi.phalla.lol/api/products"
-            readonly
-            style="
-              width: 80%;
-              max-width: 500px;
-              padding: 12px 15px;
-              background: #0000002c;
-              font-size: 16px;
-              text-align: center;
-              border-radius: 8px;
-              border: 1px solid #0000008a;
-              outline: none;
-              color: #fff;
-            "
-          />
-          <button
-            onclick="copyLink('apiInput2')"
-            style="
-              margin-left: 10px;
-              padding: 12px 20px;
-              font-size: 16px;
-              border: none;
-              border-radius: 8px;
-              background-color: #0000003d;
-              color: white;
-              cursor: pointer;
-            "
-          >
-            <i class="fa-regular fa-copy"></i>
-          </button>
+         
+        <div style="background: #2c2c2c; padding: 25px; border-radius: 12px; flex: 1 1 300px; max-width: 450px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+             <h3 style="color: #ffd700; margin-bottom: 15px;">Mini Mart API</h3>
+            <input
+              type="text"
+              id="apiInput2"
+              value="https://minimartapi.phalla.lol/api/products"
+              readonly
+            style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: #00000033; color: #fff; text-align: center; font-size: 14px; cursor: pointer;"
+            />
+            <button
+              onclick="copyLink('apiInput2')"
+            style="margin-top: 15px; width: 100%; padding: 12px; border: none; border-radius: 8px; background: #444; color: #fff; font-size: 14px; cursor: pointer;"
+            >
+              <i class="fa-regular fa-copy"></i> Copy Link
+            </button>
+            <p style="color: #ccc; margin-top: 10px; font-size: 14px; line-height: 1.4;font-family: 'Battambang', Arial, sans-serif;">
+              សម្រាប់ទាញយកផលិតផល Mini Mart JSON data។ ប្រើ GET request.
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+
+  <section id="api-link" >
+  <div style="max-width: 1000px; margin: 0 auto;">
+  
+    <!-- Code Examples -->
+    <div style="margin-top: 60px; background: #1818186b; padding: 25px; border-radius: 12px;">
+        <!-- Title -->
+    <h2 style="text-align: center; font-size: 32px; color: #ffebcd; margin-bottom: 20px;">
+      <i class="fa-solid fa-link"></i> API Documentation
+    </h2>
+      <h3 style="color: #ffd700; margin-bottom: 15px;">JavaScript Fetch Example</h3>
+      <pre style="background:#2d2d2d; padding:15px; border-radius:8px; overflow:auto;"><code class="language-javascript">fetch('https://krstoreapi.phalla.lol/api/products/kr')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+
+// Mini Mart API
+fetch('https://minimartapi.phalla.lol/api/products')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));</code></pre>
+
+      <h3 style="color: #ffd700; margin-top: 30px;">Python Requests Example</h3>
+      <pre style="background:#2d2d2d; padding:15px; border-radius:8px; overflow:auto;"><code class="language-python">import requests
+
+# KR Store API
+response = requests.get("https://krstoreapi.phalla.lol/api/products/kr")
+if response.status_code == 200:
+    data = response.json()
+    print(data)
+else:
+    print("Error:", response.status_code)
+
+# Mini Mart API
+response = requests.get("https://minimartapi.phalla.lol/api/products")
+if response.status_code == 200:
+    data = response.json()
+    print(data)
+else:
+    print("Error:", response.status_code)</code></pre>
+
+      <h3 style="color: #ffd700; margin-top: 30px;">Example JSON Response</h3>
+      <pre style="background:#2d2d2d; padding:15px; border-radius:8px; overflow:auto;"><code class="language-json">[
+  {
+    "id": 1,
+    "name": "Product A",
+    "price": 5.99,
+    "category": "drink",
+    "stock": 100
+  },
+  {
+    "id": 2,
+    "name": "Product B",
+    "price": 10.5,
+    "category": "food",
+    "stock": 50
+  }
+]
+</code></pre>
+    </div>
+  </div>
+</section>
+    <!-- Prism.js for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
 
     <section id="contact">
       <div class="scroll-animate container">
