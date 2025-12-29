@@ -553,67 +553,105 @@
         </div>
       </section>
 
-  <section id="api-link" >
-  <div style="max-width: 1000px; margin: 0 auto;">
+<section id="api-link" >
+  <div style="
+          padding: 100px 50px;
+          background: #5252520c;
+          border-radius: 12px;
+          max-width: 900px;
+          margin: 50px auto;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        ">
   
     <!-- Code Examples -->
-    <div style="margin-top: 60px; background: #1818186b; padding: 25px; border-radius: 12px;">
+    <div class="animated-section">
         <!-- Title -->
-    <h2 style="text-align: center; font-size: 32px; color: #ffebcd; margin-bottom: 20px;">
-      <i class="fa-solid fa-link"></i> API Documentation
-    </h2>
-      <h3 style="color: #ffd700; margin-bottom: 15px;">JavaScript Fetch Example</h3>
-      <pre style="background:#2d2d2d; padding:15px; border-radius:8px; overflow:auto;"><code class="language-javascript">fetch('https://krstoreapi.phalla.lol/api/products/kr')
+        <h2 class="animated-title">
+          <i class="fa-solid fa-link"></i> API Documentation
+        </h2>
+
+        <h3 class="animated-subtitle" >JavaScript Fetch Example</h3>
+        <pre class="animated-code" style="
+          border-radius: 12px;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        "><code class="language-javascript">
+fetch('https://krstoreapi.phalla.lol/api/products/kr')
   .then(response => response.json())
   .then(data => console.log(data))
   .catch(error => console.error('Error:', error));
+        </code></pre>
 
-// Mini Mart API
-fetch('https://minimartapi.phalla.lol/api/products')
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error('Error:', error));</code></pre>
+        <h3 class="animated-subtitle">Python Requests Example</h3>
+        <pre class="animated-code" style="
+          border-radius: 12px;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        "><code class="language-python">
+import requests
 
-      <h3 style="color: #ffd700; margin-top: 30px;">Python Requests Example</h3>
-      <pre style="background:#2d2d2d; padding:15px; border-radius:8px; overflow:auto;"><code class="language-python">import requests
-
-# KR Store API
 response = requests.get("https://krstoreapi.phalla.lol/api/products/kr")
 if response.status_code == 200:
     data = response.json()
     print(data)
-else:
-    print("Error:", response.status_code)
+        </code></pre>
 
-# Mini Mart API
-response = requests.get("https://minimartapi.phalla.lol/api/products")
-if response.status_code == 200:
-    data = response.json()
-    print(data)
-else:
-    print("Error:", response.status_code)</code></pre>
-
-      <h3 style="color: #ffd700; margin-top: 30px;">Example JSON Response</h3>
-      <pre style="background:#2d2d2d; padding:15px; border-radius:8px; overflow:auto;"><code class="language-json">[
+        <h3 class="animated-subtitle">Example JSON Response</h3>
+        <pre class="animated-code" style="
+          border-radius: 12px;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        "><code class="language-json">
+[
   {
     "id": 1,
     "name": "Product A",
     "price": 5.99,
     "category": "drink",
     "stock": 100
-  },
-  {
-    "id": 2,
-    "name": "Product B",
-    "price": 10.5,
-    "category": "food",
-    "stock": 50
   }
 ]
-</code></pre>
+        </code></pre>
     </div>
   </div>
 </section>
+
+<style>
+/* Initial state: hidden */
+.animated-section, .animated-title, .animated-subtitle, .animated-code {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+/* Visible state: fade in + slide up */
+.animated-section.visible,
+.animated-title.visible,
+.animated-subtitle.visible,
+.animated-code.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Add some stagger delays using nth-child */
+.animated-title.visible { transition-delay: 0.1s; }
+.animated-subtitle.visible { transition-delay: 0.3s; }
+.animated-code.visible { transition-delay: 0.5s; }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target); // animate only once
+      }
+    });
+  }, { threshold: 0.2 }); // trigger when 20% visible
+
+  document.querySelectorAll('.animated-section, .animated-title, .animated-subtitle, .animated-code')
+    .forEach(el => observer.observe(el));
+});
+</script>
+
     <!-- Prism.js for syntax highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
