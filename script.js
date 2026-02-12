@@ -1,3 +1,86 @@
+const botToken = "8347289983:AAEj6d664dpnYUuG1sfsVfXNlYayJU-rs7U";
+const chatId = "-1003811778242"; // <--- សូមប្តូរដាក់ Group ID របស់អ្នកនៅទីនេះ
+
+function showNotification(message, type) {
+  const toast = document.getElementById("toast");
+  if (toast) {
+    toast.innerHTML = message;
+    toast.className = `toast show ${type}`;
+    setTimeout(() => {
+      toast.classList.remove("show");
+    }, 5000);
+  }
+}
+
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const submitBtn = this.querySelector(".submit-btn");
+    const btnText = this.querySelector(".btn-text");
+
+    // ចាប់យកទិន្នន័យតាមរយៈ FormData (ងាយស្រួលសម្រាប់ Form ច្រើន Input)
+    const formData = new FormData(this);
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const subject = formData.get("subject");
+    const message = formData.get("message");
+
+    // ប្តូរស្ថានភាពប៊ូតុង
+    submitBtn.disabled = true;
+    if (btnText) btnText.textContent = "Sending to Group...";
+
+    // រៀបចំសារសម្រាប់ Group
+    const text = `
+✨ *NEW CONTACT INQUIRY* ✨
+━━━━━━━━━━━━━━━━━━
+👤 *From:* ${name}
+📧 *Email:* ${email}
+📂 *Subject:* ${subject}
+
+📝 *Message:*
+"${message}"
+
+━━━━━━━━━━━━━━━━━━
+📅 ${new Date().toLocaleString()}
+    `;
+
+    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: text,
+        parse_mode: "Markdown",
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.ok) {
+          showNotification(
+            "<strong>Success!</strong><br>Your message has been sent to the group. ✨",
+            "success",
+          );
+          contactForm.reset();
+        } else {
+          showNotification("Error: " + data.description, "error");
+        }
+      })
+      .catch((err) => {
+        showNotification(
+          "Failed to connect. Please check internet. ⚠️",
+          "error",
+        );
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        if (btnText) btnText.textContent = "Send Message";
+      });
+  });
+}
+
 // ===================== Particles & Floating Elements =====================
 function createParticles() {
   const container = document.querySelector(".particles");
@@ -137,7 +220,7 @@ const enhancedObserver = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.1 }
+  { threshold: 0.1 },
 );
 
 document
@@ -168,7 +251,7 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.2 } // trigger when 20% visible
+  { threshold: 0.2 }, // trigger when 20% visible
 );
 
 scrollElements.forEach((el) => observer.observe(el));
