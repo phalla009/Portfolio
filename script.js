@@ -382,7 +382,8 @@ document.addEventListener("keydown", function (e) {
 });
 
 // ===================== Dynamic View Counter (Firebase) =====================
-const DB_URL = "https://YOUR-PROJECT-ID-default-rtdb.firebaseio.com";
+// ✅ ប្តូរជា URL ពិតរបស់អ្នក
+const DB_URL = "https://phalla-default-rtdb.firebaseio.com";
 
 async function updateViewCount() {
   const el = document.getElementById("viewCount");
