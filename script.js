@@ -381,26 +381,21 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
-// === Dynamic View Counter (Firebase) ===
+// ===================== Dynamic View Counter (Firebase) =====================
 const DB_URL = "https://YOUR-PROJECT-ID-default-rtdb.firebaseio.com";
 
 async function updateViewCount() {
   const el = document.getElementById("viewCount");
   if (!el) return;
   try {
-    // Read current count
     const res = await fetch(`${DB_URL}/views.json`);
     const count = (await res.json()) || 0;
-
-    // Increment by 1
     const newCount = count + 1;
     await fetch(`${DB_URL}/views.json`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newCount),
     });
-
-    // Display with comma formatting
     el.textContent = newCount.toLocaleString();
   } catch (err) {
     el.textContent = "—";

@@ -1788,14 +1788,13 @@ b {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #aaa;
+  color: #aaaaaa;
   font-size: 0.9rem;
-  margin-top: 16px;
+  margin-top: 20px;
 }
+
 .view-counter svg {
   width: 16px;
   height: 16px;
   stroke: #00d4ff;
-  fill: none;
-  stroke-width: 1.5;
 }
