@@ -1785,13 +1785,17 @@ b {
   margin-bottom: 5px;
 }
 .view-counter {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #111;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 30px;
-  font-size: 14px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-top: 16px;
+}
+.view-counter svg {
+  width: 16px;
+  height: 16px;
+  stroke: #00d4ff;
+  fill: none;
+  stroke-width: 1.5;
 }
