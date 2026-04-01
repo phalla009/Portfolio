@@ -380,7 +380,8 @@ document.addEventListener("keydown", function (e) {
     alert("Inspecting is disabled!");
   }
 });
-// ===================== Dynamic View Counter (Firebase) =====================
+
+// ===================== Dynamic View Counter (Firebase - Count Once Per Session) =====================
 const DB_URL =
   "https://phalla-1ca4d-default-rtdb.asia-southeast1.firebasedatabase.app";
 
@@ -388,23 +389,33 @@ async function updateViewCount() {
   const el = document.getElementById("viewCount");
   if (!el) return;
   try {
-    // ✅ Step 1: Read current count
-    const res = await fetch(`${DB_URL}/views.json`);
-    const data = await res.json();
-    const current = typeof data === "number" ? data : 0;
+    const alreadyCounted = sessionStorage.getItem("viewCounted");
 
-    // ✅ Step 2: Write new count
-    const newCount = current + 1;
-    await fetch(`${DB_URL}/views.json`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newCount),
-    });
+    if (!alreadyCounted) {
+      // ✅ First visit — increment
+      const res = await fetch(`${DB_URL}/views.json?t=${Date.now()}`);
+      const data = await res.json();
+      const current = typeof data === "number" ? data : 0;
+      const newCount = current + 1;
 
-    // ✅ Step 3: Display
-    el.textContent = newCount.toLocaleString();
+      await fetch(`${DB_URL}/views.json`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newCount),
+      });
+
+      el.textContent = newCount.toLocaleString();
+
+      // ✅ Mark as counted for this session
+      sessionStorage.setItem("viewCounted", "true");
+    } else {
+      // ✅ Already counted — just display current value
+      const res = await fetch(`${DB_URL}/views.json?t=${Date.now()}`);
+      const data = await res.json();
+      el.textContent = typeof data === "number" ? data.toLocaleString() : "—";
+    }
   } catch (err) {
-    console.error("View counter error:", err);
+    console.error("Firebase error:", err);
     el.textContent = "—";
   }
 }
