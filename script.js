@@ -380,30 +380,31 @@ document.addEventListener("keydown", function (e) {
     alert("Inspecting is disabled!");
   }
 });
-
 // ===================== Dynamic View Counter (Firebase) =====================
-// ✅ ប្តូរជា URL ពិតរបស់អ្នក
-const DB_URL = "https://phalla-default-rtdb.firebaseio.com";
+const DB_URL =
+  "https://phalla-1ca4d-default-rtdb.asia-southeast1.firebasedatabase.app";
 
 async function updateViewCount() {
   const el = document.getElementById("viewCount");
   if (!el) return;
   try {
+    // ✅ Step 1: Read current count
     const res = await fetch(`${DB_URL}/views.json`);
     const data = await res.json();
+    const current = typeof data === "number" ? data : 0;
 
-    // ✅ FIX: parse correctly — Firebase returns null or a number
-    const count = typeof data === "number" ? data : 0;
-    const newCount = count + 1;
-
+    // ✅ Step 2: Write new count
+    const newCount = current + 1;
     await fetch(`${DB_URL}/views.json`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newCount),
     });
 
+    // ✅ Step 3: Display
     el.textContent = newCount.toLocaleString();
   } catch (err) {
+    console.error("View counter error:", err);
     el.textContent = "—";
   }
 }
