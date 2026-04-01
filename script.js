@@ -380,3 +380,8 @@ document.addEventListener("keydown", function (e) {
     alert("Inspecting is disabled!");
   }
 });
+fetch("https://api.countapi.xyz/hit/zshop-portfolio/views")
+  .then((res) => res.json())
+  .then((data) => {
+    document.getElementById("viewCount").innerText = data.value;
+  });
