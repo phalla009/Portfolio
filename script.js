@@ -389,13 +389,18 @@ async function updateViewCount() {
   if (!el) return;
   try {
     const res = await fetch(`${DB_URL}/views.json`);
-    const count = (await res.json()) || 0;
+    const data = await res.json();
+
+    // ✅ FIX: parse correctly — Firebase returns null or a number
+    const count = typeof data === "number" ? data : 0;
     const newCount = count + 1;
+
     await fetch(`${DB_URL}/views.json`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newCount),
     });
+
     el.textContent = newCount.toLocaleString();
   } catch (err) {
     el.textContent = "—";
