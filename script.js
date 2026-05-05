@@ -239,6 +239,17 @@ toggleBtn.addEventListener("click", () => {
   navLinks.classList.toggle("active");
 });
 
+// Close menu when clicking outside
+document.addEventListener("click", (e) => {
+  if (
+    navLinks.classList.contains("active") &&
+    !navLinks.contains(e.target) &&
+    !toggleBtn.contains(e.target)
+  ) {
+    navLinks.classList.remove("active");
+  }
+});
+
 // ===================== Scroll Animations =====================
 const scrollElements = document.querySelectorAll(".scroll-animate");
 
