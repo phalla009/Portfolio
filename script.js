@@ -463,3 +463,199 @@ window.addEventListener("scroll", () => {
 backToTopBtn.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
+
+// ===================== API Docs: typing animation + Prism highlighting =====================
+const jsCode = `fetch('https://krstoreapi.phalla.lol/api/products/kr')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));`;
+
+const pyCode = `import requests
+response = requests.get("https://krstoreapi.phalla.lol/api/products/kr")
+if response.status_code == 200:
+    data = response.json()
+    print(data)`;
+
+const jsonDataSample = [
+  {
+    category_name: "friends",
+    create_at: "2025-12-27",
+    description: "Adriana Bouquet ",
+    id: 1,
+    image: "images/c317ae589ec34373958cf3bf3311f54f_Adriana_Bouquet.jpg",
+    price: 34.0,
+    product_name: "ADRIANA BOUQUET",
+    stock: 12,
+  },
+  {
+    category_name: "friends",
+    create_at: "2025-12-27",
+    description: "Alexandra Bouquet",
+    id: 2,
+    image: "images/09fe024ad0fe405b94f172f03cc0cc29_Alexandra_Bouquet.jpg",
+    price: 35.0,
+    product_name: "ALEXANDRA BOUQUET",
+    stock: 12,
+  },
+];
+const jsonCode = JSON.stringify(jsonDataSample, null, 2);
+
+function typeRaw(elId, cursorId, source, speed, onDone) {
+  const el = document.getElementById(elId);
+  const cursor = document.getElementById(cursorId);
+  if (!el || !cursor) {
+    if (onDone) onDone();
+    return;
+  }
+  cursor.classList.add("blink");
+  let i = 0;
+  function step() {
+    if (i <= source.length) {
+      el.textContent = source.slice(0, i);
+      i++;
+      setTimeout(step, speed);
+    } else {
+      cursor.classList.remove("blink");
+      cursor.classList.add("done");
+      if (window.Prism) Prism.highlightElement(el);
+      if (onDone) setTimeout(onDone, 300);
+    }
+  }
+  step();
+}
+
+function runApiDocsAnimation() {
+  typeRaw("code-js", "cursor-js", jsCode, 14, function () {
+    typeRaw("code-py", "cursor-py", pyCode, 14, function () {
+      typeRaw("code-json", "cursor-json", jsonCode, 8);
+    });
+  });
+}
+
+const apiDocsSection = document.getElementById("api-docs");
+if (apiDocsSection) {
+  let apiDocsHasRun = false;
+  const apiDocsObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !apiDocsHasRun) {
+          apiDocsHasRun = true;
+          runApiDocsAnimation();
+          apiDocsObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 },
+  );
+  apiDocsObserver.observe(apiDocsSection);
+}
+
+(function () {
+  const section = document.getElementById("aboutSection");
+
+  const para1 = document.getElementById("typewriterPara1");
+  const para2 = document.getElementById("typewriterPara2");
+
+  // Paragraph 1 text, split around the bold name
+  const p1Before = "My name is ";
+  const p1Bold = "HEANG PHALLA";
+  const p1After =
+    ", a 21-year-old graduate in Management Information Systems from SETEC Institute. Originally from Prey Veng, I am currently based in Chamkarmon, Phnom Penh.";
+
+  // Paragraph 2 text (no bold)
+  const p2Text =
+    "I am a Full-Stack Developer with a strong focus on building robust, scalable backend systems and modern, user-centric web applications. I specialize in bridging the gap between business management and technical implementation to deliver efficient, real-world digital solutions.";
+
+  let timeouts = [];
+  let isRunning = false;
+
+  function clearAllTimeouts() {
+    timeouts.forEach(clearTimeout);
+    timeouts = [];
+  }
+
+  function typeInto(paraEl, combinedHTML, onDone) {
+    const span = paraEl.querySelector(".typewriter-content");
+    span.innerHTML = "";
+    paraEl.classList.add("typing");
+
+    let displayed = "";
+    let rawIndex = 0;
+
+    function step() {
+      if (rawIndex >= combinedHTML.length) {
+        paraEl.classList.remove("typing");
+        onDone();
+        return;
+      }
+
+      if (combinedHTML.slice(rawIndex).startsWith("{{BOLD_START}}")) {
+        displayed += "<strong>";
+        rawIndex += "{{BOLD_START}}".length;
+        span.innerHTML = displayed;
+        timeouts.push(setTimeout(step, 0));
+        return;
+      }
+      if (combinedHTML.slice(rawIndex).startsWith("{{BOLD_END}}")) {
+        displayed += "</strong>";
+        rawIndex += "{{BOLD_END}}".length;
+        span.innerHTML = displayed;
+        timeouts.push(setTimeout(step, 0));
+        return;
+      }
+
+      displayed += combinedHTML[rawIndex];
+      span.innerHTML = displayed;
+      rawIndex++;
+
+      const speed = 18 + Math.random() * 22;
+      timeouts.push(setTimeout(step, speed));
+    }
+
+    step();
+  }
+
+  function resetParas() {
+    clearAllTimeouts();
+    isRunning = false;
+    [para1, para2].forEach((p) => {
+      p.classList.remove("typing");
+      p.querySelector(".typewriter-content").innerHTML = "";
+    });
+  }
+
+  function runSequence() {
+    if (isRunning) return;
+    isRunning = true;
+
+    const combined1 =
+      p1Before + "{{BOLD_START}}" + p1Bold + "{{BOLD_END}}" + p1After;
+
+    typeInto(para1, combined1, () => {
+      // small pause before second paragraph starts
+      timeouts.push(
+        setTimeout(() => {
+          typeInto(para2, p2Text, () => {
+            isRunning = false;
+          });
+        }, 300),
+      );
+    });
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          resetParas();
+          runSequence();
+        } else {
+          resetParas();
+        }
+      });
+    },
+    { threshold: 0.3 },
+  );
+
+  observer.observe(section);
+})();

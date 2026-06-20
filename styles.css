@@ -492,6 +492,7 @@ h2 {
   min-height: 120px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 5px solid rgba(255, 255, 255, 0.167);
   transition: all 0.3s ease;
   transform: translateY(0);
 }
@@ -619,6 +620,7 @@ h2 {
   border-radius: 15px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 5px solid rgba(255, 255, 255, 0.167);
   transition: all 0.3s ease;
   transform: translateY(0);
 }
@@ -712,7 +714,80 @@ h2 {
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
+.animated-code {
+  border-radius: 12px;
+  border-top: 5px solid rgba(255, 255, 255, 0.167);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+.api-link {
+  border-top: 5px solid rgba(255, 255, 255, 0.167);
+  background: #2c2c2c;
+  padding: 25px;
+  border-radius: 12px;
+  flex: 1 1 300px;
+  max-width: 450px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+.api-link h3 {
+  color: #ffd700;
+  margin-bottom: 15px;
+}
+.api-link p {
+  color: #ccc;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  font-family: "Battambang", Arial, sans-serif;
+}
+.copy-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #444;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.copy-btn:hover {
+  background: #555;
+}
+.cursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  background: currentColor;
+  vertical-align: -2px;
+}
+.cursor.blink {
+  animation: blink 0.9s step-end infinite;
+}
+.cursor.done {
+  opacity: 0;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
 
+.tok-key {
+  color: #9cdcfe;
+}
+.tok-str {
+  color: #ce9178;
+}
+.tok-num {
+  color: #b5cea8;
+}
+.tok-punc {
+  color: #888;
+}
+.tok-kw {
+  color: #c586c0;
+}
 /* Contact Section */
 #contact {
   background: radial-gradient(
@@ -1388,6 +1463,26 @@ footer {
   }
 }
 /* ================= Scroll Animations ================= */
+.typewriter-text {
+  overflow: hidden;
+  border-right: 2px solid transparent;
+  white-space: normal;
+}
+
+.typewriter-text.typing {
+  border-right-color: currentColor;
+  animation: blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: currentColor;
+  }
+}
 .scroll-animate {
   opacity: 0;
   transform: translateY(50px);
@@ -2059,5 +2154,104 @@ b {
     width: 44px;
     height: 44px;
     font-size: 18px;
+  }
+}
+.api-docs-panel {
+  padding: 100px 50px;
+  border-top: 5px solid rgba(255, 255, 255, 0.167);
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(65, 65, 65, 0.1),
+    rgba(96, 96, 96, 0.1) 4px,
+    rgba(182, 182, 182, 0.15) 4px,
+    rgba(255, 255, 255, 0.15) 8px
+  );
+  border-radius: 12px;
+  max-width: 900px;
+  width: 100%;
+  margin: 50px auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Let pre/code blocks scroll horizontally instead of blowing out the layout.
+     position:relative + isolation creates a new stacking/scroll context so an
+     ancestor's overflow:hidden (common site-wide to stop page scroll) can't
+     suppress scrolling on this element specifically. */
+.api-docs-panel pre.animated-code {
+  position: relative;
+  display: block;
+  overflow-x: scroll !important;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  white-space: pre !important;
+  word-wrap: normal;
+  word-break: normal;
+}
+
+.api-docs-panel pre.animated-code code {
+  white-space: pre !important;
+  word-wrap: normal;
+  word-break: normal;
+  display: inline-block;
+  min-width: 100%;
+}
+
+/* Thin, visible scrollbar so people on desktop notice it's scrollable too */
+.api-docs-panel pre.animated-code::-webkit-scrollbar {
+  height: 6px;
+  display: block;
+}
+.api-docs-panel pre.animated-code::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+.api-docs-panel pre.animated-code::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Right-edge fade hint on mobile so it's visually obvious there's more content */
+@media (max-width: 768px) {
+  .api-docs-panel pre.animated-code {
+    mask-image: linear-gradient(to right, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 92%, transparent 100%);
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .api-docs-panel {
+    padding: 60px 30px;
+    margin: 30px auto;
+    border-radius: 10px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .api-docs-panel {
+    padding: 40px 16px;
+    margin: 20px auto;
+    border-radius: 8px;
+    /* avoid edge-to-edge with zero breathing room on very narrow screens */
+    width: calc(100% - 16px);
+  }
+
+  .animated-title {
+    font-size: 1.4rem;
+    line-height: 1.3;
+  }
+
+  .animated-subtitle {
+    font-size: 1rem;
+  }
+
+  .api-docs-panel pre.animated-code {
+    font-size: 0.8rem;
+    padding: 12px;
   }
 }
