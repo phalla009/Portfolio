@@ -12,7 +12,9 @@ body {
   color: #fff;
   overflow-x: hidden;
 }
-
+body::-webkit-scrollbar {
+  display: none;
+}
 @keyframes gradientBG {
   0% {
     background-position: 0% 50%;
@@ -106,7 +108,14 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  background: #00000094;
+  background: repeating-linear-gradient(
+    -45deg,
+    #00000094,
+    #00000094 4px,
+    #00000094 4px,
+    rgba(98, 98, 98, 0.15) 8px
+  );
+  /* background: #00000094; */
   backdrop-filter: blur(10px);
   z-index: 1000;
   transition: all 0.3s ease;
@@ -142,9 +151,15 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  background: rgba(26, 26, 46, 0.8);
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(26, 26, 46, 0.8),
+    rgba(26, 26, 46, 0.8) 4px,
+    rgba(255, 255, 255, 0.15) 4px,
+    rgba(255, 255, 255, 0.15) 8px
+  );
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+  box-shadow: 0 5px 15px rgba(148, 148, 148, 0.3);
 }
 
 /* Hero Section */
@@ -460,15 +475,21 @@ h2 {
 
 .stack-item {
   width: 200px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px; /* Increased from 15px to 20px */
-  border-radius: 12px; /* Slightly increased for a softer look */
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1) 4px,
+    rgba(255, 255, 255, 0.15) 4px,
+    rgba(255, 255, 255, 0.15) 8px
+  );
+  padding: 20px;
+  border-radius: 12px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px; /* Increased from 5px to 8px */
-  min-height: 120px; /* Added to ensure consistent height */
+  gap: 8px;
+  min-height: 120px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
@@ -492,7 +513,6 @@ h2 {
   border: 1px solid #0099ffe1; /* Correct syntax: width style color */
   transform: translateY(-10px);
   box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
-  background: rgba(255, 255, 255, 0.15);
   transition: all 0.3s ease; /* Smooth hover effect */
 }
 
@@ -588,7 +608,13 @@ h2 {
 }
 
 .project-card {
-  background: rgba(255, 255, 255, 0.1);
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1) 4px,
+    rgba(255, 255, 255, 0.15) 4px,
+    rgba(255, 255, 255, 0.15) 8px
+  );
   padding: 30px;
   border-radius: 15px;
   backdrop-filter: blur(10px);
@@ -602,7 +628,6 @@ h2 {
   border: 1px solid #0099ffe1;
   transform: translateY(-10px);
   box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
-  background: rgba(255, 255, 255, 0.15);
 }
 
 .project-card h3 {
@@ -755,7 +780,13 @@ a {
   align-items: center;
   gap: 15px;
   padding: 15px 20px;
-  background: rgba(255, 255, 255, 0.05);
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1) 4px,
+    rgba(255, 255, 255, 0.15) 4px,
+    rgba(255, 255, 255, 0.15) 8px
+  );
   border-radius: 15px;
   border: 1px solid rgba(0, 212, 255, 0.2);
   transition: all 0.3s ease;
@@ -764,9 +795,8 @@ a {
 
 .contact-method:hover {
   cursor: pointer;
-  background: rgba(0, 212, 255, 0.1);
   transform: translateX(10px);
-  box-shadow: 0 5px 25px rgba(0, 212, 255, 0.2);
+  box-shadow: 0 5px 25px rgba(76, 225, 255, 0.342);
 }
 
 .contact-method-icon {
@@ -824,7 +854,13 @@ a {
 
 .contact-form-container {
   margin-top: 65px;
-  background: rgba(255, 255, 255, 0.05);
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1) 4px,
+    rgba(255, 255, 255, 0.15) 4px,
+    rgba(255, 255, 255, 0.15) 8px
+  );
   padding: 40px;
   border-radius: 25px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1039,7 +1075,6 @@ footer {
   }
   /* Basic styling */
   header {
-    background: #111;
     color: #fff;
     padding: 15px 0;
   }
