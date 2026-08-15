@@ -5,6 +5,19 @@
     {
       "source": "/zshop/:path*",
       "destination": "https://zshop.phalla.lol/zshop/:path*"
+    },
+
+    {
+      "source": "/krecomstore",
+      "destination": "https://krecomstore.phalla.lol/krecomstore"
+    },
+    {
+      "source": "/krecomstore/",
+      "destination": "https://krecomstore.phalla.lol/krecomstore"
+    },
+    {
+      "source": "/krecomstore/:path*",
+      "destination": "https://krecomstore.phalla.lol/krecomstore/:path*"
     }
   ]
 }
