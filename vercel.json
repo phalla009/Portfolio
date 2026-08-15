@@ -1,9 +1,3 @@
 {
-  "rewrites": [
-    { "source": "/zshop", "destination": "https://zshop.phalla.lol/zshop" },
-    {
-      "source": "/zshop/:path*",
-      "destination": "https://zshop.phalla.lol/zshop/:path*"
-    }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
