@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/zshop", "destination": "https://zshop.phalla.lol" },
+    {
+      "source": "/zshop/:path*",
+      "destination": "https://zshop.phalla.lol/:path*"
+    }
+  ]
+}
