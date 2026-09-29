@@ -6,7 +6,7 @@
 
 body {
   font-family: "Arial", sans-serif;
-  background: #000000f7;
+  background: #0f1117;
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
   color: #fff;
@@ -110,10 +110,10 @@ header {
   right: 0;
   background: repeating-linear-gradient(
     -45deg,
-    #00000094,
-    #00000094 4px,
-    #00000094 4px,
-    rgba(98, 98, 98, 0.15) 8px
+    #0f1117,
+    #181c27 2px,
+    rgb(9, 9, 9) 4px,
+    rgb(9, 9, 9) 4px
   );
   /* background: #00000094; */
   backdrop-filter: blur(10px);
@@ -129,7 +129,13 @@ nav {
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #0099ffe1;
+  color: repeating-linear-gradient(
+    -45deg,
+    #ffe4cb,
+    #fbcea1,
+    #ffe4cb 3px,
+    #fbcea1 3px
+  );
   text-decoration: none;
   text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
 }
@@ -153,10 +159,10 @@ nav ul li a {
 nav ul li a:hover {
   background: repeating-linear-gradient(
     -45deg,
-    rgba(26, 26, 46, 0.8),
-    rgba(26, 26, 46, 0.8) 4px,
-    rgba(255, 255, 255, 0.15) 4px,
-    rgba(255, 255, 255, 0.15) 8px
+    #0f1117,
+    #181c27 2px,
+    rgb(9, 9, 9) 4px,
+    rgb(9, 9, 9) 4px
   );
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(148, 148, 148, 0.3);
@@ -477,10 +483,10 @@ h2 {
   width: 200px;
   background: repeating-linear-gradient(
     -45deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.1) 4px,
-    rgba(255, 255, 255, 0.15) 4px,
-    rgba(255, 255, 255, 0.15) 8px
+    #0f1117,
+    #181c27 2px,
+    rgb(9, 9, 9) 4px,
+    rgb(9, 9, 9) 4px
   );
   padding: 20px;
   border-radius: 12px;
@@ -491,8 +497,8 @@ h2 {
   gap: 8px;
   min-height: 120px;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-top: 5px solid rgba(255, 255, 255, 0.167);
+  border: 1px solid #181c27;
+  border-top: 5px solid #181c27;
   transition: all 0.3s ease;
   transform: translateY(0);
 }
@@ -511,9 +517,9 @@ h2 {
 
 .stack-item:hover {
   cursor: pointer;
-  border: 1px solid #0099ffe1; /* Correct syntax: width style color */
+  border: 1px solid #5d6e7186; /* Correct syntax: width style color */
   transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+  box-shadow: 0 15px 40px rgba(28, 76, 85, 0.2);
   transition: all 0.3s ease; /* Smooth hover effect */
 }
 
@@ -611,31 +617,31 @@ h2 {
 .project-card {
   background: repeating-linear-gradient(
     -45deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.1) 4px,
-    rgba(255, 255, 255, 0.15) 4px,
-    rgba(255, 255, 255, 0.15) 8px
+    #0f1117,
+    #181c27 2px,
+    rgb(9, 9, 9) 4px,
+    rgb(9, 9, 9) 4px
   );
   padding: 30px;
   border-radius: 15px;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-top: 5px solid rgba(255, 255, 255, 0.167);
+  border: 1px solid #181c27;
+  border-top: 5px solid #181c27;
   transition: all 0.3s ease;
   transform: translateY(0);
 }
 
 .project-card:hover {
   cursor: pointer;
-  border: 1px solid #0099ffe1;
+  border: 1px solid #5d6e7186; /* Correct syntax: width style color */
   transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+  box-shadow: 0 15px 40px rgba(28, 76, 85, 0.2);
 }
 
 .project-card h3 {
   font-size: 1.5rem;
   margin-bottom: 15px;
-  color: #0099ffe1;
+  color: #559dcee1;
 }
 
 .project-card p {
@@ -716,12 +722,12 @@ h2 {
 }
 .animated-code {
   border-radius: 12px;
-  border-top: 5px solid rgba(255, 255, 255, 0.167);
+  border-top: 5px solid #181c27;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 .api-link {
-  border-top: 5px solid rgba(255, 255, 255, 0.167);
-  background: #2c2c2c;
+  border-top: 5px solid #181c27;
+  background: #181c27;
   padding: 25px;
   border-radius: 12px;
   flex: 1 1 300px;
@@ -745,14 +751,14 @@ h2 {
   padding: 12px;
   border: none;
   border-radius: 8px;
-  background: #444;
+  background: #11141c;
   color: #fff;
   font-size: 14px;
   cursor: pointer;
   transition: background 0.2s ease;
 }
 .copy-btn:hover {
-  background: #555;
+  background: #0b0d12;
 }
 .cursor {
   display: inline-block;
@@ -857,10 +863,10 @@ a {
   padding: 15px 20px;
   background: repeating-linear-gradient(
     -45deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.1) 4px,
-    rgba(255, 255, 255, 0.15) 4px,
-    rgba(255, 255, 255, 0.15) 8px
+    #0f1117,
+    #181c27 2px,
+    rgb(9, 9, 9) 4px,
+    rgb(9, 9, 9) 4px
   );
   border-radius: 15px;
   border: 1px solid rgba(0, 212, 255, 0.2);
@@ -931,10 +937,10 @@ a {
   margin-top: 65px;
   background: repeating-linear-gradient(
     -45deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.1) 4px,
-    rgba(255, 255, 255, 0.15) 4px,
-    rgba(255, 255, 255, 0.15) 8px
+    #0f1117,
+    #181c27 2px,
+    rgb(9, 9, 9) 4px,
+    rgb(9, 9, 9) 4px
   );
   padding: 40px;
   border-radius: 25px;
@@ -2158,13 +2164,13 @@ b {
 }
 .api-docs-panel {
   padding: 100px 50px;
-  border-top: 5px solid rgba(255, 255, 255, 0.167);
+  border-top: 5px solid #181c27;
   background: repeating-linear-gradient(
     -45deg,
-    rgba(65, 65, 65, 0.1),
-    rgba(96, 96, 96, 0.1) 4px,
-    rgba(182, 182, 182, 0.15) 4px,
-    rgba(255, 255, 255, 0.15) 8px
+    #0f1117,
+    #181c27 2px,
+    rgb(9, 9, 9) 4px,
+    rgb(9, 9, 9) 4px
   );
   border-radius: 12px;
   max-width: 900px;
@@ -2207,11 +2213,11 @@ b {
   display: block;
 }
 .api-docs-panel pre.animated-code::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
+  background: #11141c;
   border-radius: 3px;
 }
 .api-docs-panel pre.animated-code::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: #11141c;
 }
 
 /* Right-edge fade hint on mobile so it's visually obvious there's more content */
